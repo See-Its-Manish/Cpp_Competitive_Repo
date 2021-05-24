@@ -1,0 +1,9 @@
+10 20
+Scope Created
+Player Destructed
+Scope Ended
+2
+2
+0
+Player Destructed
+Player Destructed

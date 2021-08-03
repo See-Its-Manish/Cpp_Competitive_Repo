@@ -1,4 +1,4 @@
-//Link   -
+//Link   - https://www.codechef.com/START5C/problems/BLITZ3_2
 //Author - seeitsmanish
 #include<bits/stdc++.h>
 // #include<ext/pb_ds/assoc_container.hpp>
@@ -27,11 +27,12 @@ using namespace std;
 #define print(v)    			for(auto &n:v) cout<<n<<" "; cout<<endl
 #define printpair(v)			for(auto &it:v) cout<<it.ff<<" "<<it.ss<<endl; cout<<"Ended"<<endl;
 #define loop(i,s,e) 			for(auto i=s; i<=e; ++i)
+#define looprev(i,s,e)			for(autu i=(s); i>=(e); --i)
 #define mem(var,val)			memset(var,val,sizeof(var))
 #define log(args...)			{ string _s = #args; replace(_s.begin(), _s.end(), ',', ' '); stringstream _ss(_s); istream_iterator<string> _it(_ss); err(_it, args); }
-int max(int a, int b) {return a > b ? a : b;}
-int min(int a, int b) {return a > b ? b : a;}
-int __gcd(int a, int b) {return b == 0 ? a : __gcd(b, a % b);}
+ll max(ll a, ll b) {return a > b ? a : b;}
+ll min(ll a, ll b) {return a > b ? b : a;}
+ll __gcd(ll a, ll b) {return b == 0 ? a : __gcd(b, a % b);}
 void err(istream_iterator<string> it) {}
 template<typename T, typename... Args>
 void err(istream_iterator<string> it, T a, Args... args) {
@@ -50,45 +51,24 @@ void FIO() {
 // typedef trie<string, null_type, trie_string_access_traits<>, pat_trie_tag, trie_prefix_search_node_update> pbtrie;
 
 
-ll max_sum_subarray(vi& a, ll n)
-{
-	ll maxsum = 0;
-	ll currsum = 0;
 
-	loop(i, 0, n - 1)
-	{
-		currsum += a[i];
-		if (currsum > maxsum)
-			maxsum = currsum;
-		if (currsum < 0)
-			currsum = 0;
-	}
-	return maxsum;
-}
 
 int main() {
 	FIO();
 
 	// Code Starts from here!
 
-	ll n;
-	cin >> n;
-	ll a[n + 1];
-	loop(i, 1, n) cin >> a[i];
-
-	ll dp[n + 1];
-	dp[1] = a[1];
-	dp[2] = max(a[2], a[1] + a[2]);
-
-	loop(i, 3, n)
+	int t;
+	cin >> t;
+	// flush;
+	while (t--)
 	{
-		dp[i] = max(dp[i - 1] + a[i], a[i]);
+		ll n, a, b;
+		cin >> n >> a >> b;
+		ll tt = 2 * (180 + n);
+		ll ans = tt - (a + b);
+		cout << ans << endl;
 	}
-	loop(i, 1, n) cout << dp[i] << " ";
-	cout << endl;
-	ll maxsum = INT_MIN;
-	loop(i, 1, n) maxsum = max(dp[i], maxsum);
-	cout << maxsum << endl;
 
 
 

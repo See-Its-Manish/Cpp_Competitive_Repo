@@ -7,9 +7,9 @@ class student {
 
 public:
 
-	student RetStudent() {		//public member of student
-		student abc;
-		return (abc);
+	student* RetStudent() {		//public member of student
+		student* s = new student;
+		return s;
 	}
 
 };
@@ -17,7 +17,7 @@ public:
 
 int main() {
 	// student std;	// Object
-	student *std = new student.RetStudent();
-
+	student* s;
+	s = s->RetStudent();
 	return 0;
 }

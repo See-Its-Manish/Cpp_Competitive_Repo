@@ -1,4 +1,4 @@
-//Link   - https://codeforces.com/contest/1555/problem/A
+//Link   - https://www.spoj.com/problems/PRIME1/
 //Author - seeitsmanish
 #include<bits/stdc++.h>
 // #include<ext/pb_ds/assoc_container.hpp>
@@ -14,7 +14,7 @@ using namespace std;
 #define mod                     1000000007
 #define vi                      vector<ll>
 #define vii                     vector<ll,ll>
-#define vs                      vector<string>
+#define vs                      vector<>string>
 #define pii                     pair<ll,ll>
 #define mii                     map<ll,ll>
 #define ump                     unordered_map
@@ -23,7 +23,7 @@ using namespace std;
 #define pq_min                  priority_queue<ll,vi,greater<ll>>
 #define endl                    "\n"
 #define flush                   cin.get()
-#define mid(l,r)                l+(r-l)/2
+#define mid(l,r)                (l+(r-l)/2)
 #define all(v)                  v.begin(), v.end()
 #define print(v)                for(auto &n:v) cout<<n<<" "; cout<<endl
 #define printpair(v)            for(auto &it:v) cout<<it.ff<<" "<<it.ss<<endl; cout<<"Ended"<<endl;
@@ -51,7 +51,28 @@ void FIO() {
 // typedef tree<int, null_type, less<int>, rb_tree_tag, tree_order_statistics_node_update> pbds;
 // typedef trie<string, null_type, trie_string_access_traits<>, pat_trie_tag, trie_prefix_search_node_update> pbtrie;
 
+const int N = 100000;
+bitset<N> isprimes;
+void sieve()
+{
+	isprimes.set();
+	isprimes[0] = isprimes[1] = false;
 
+	for (ll i = 2; i * i <= N; i++) {
+		if (isprimes[i]) {
+			for (int j = i * i; j <= n; j += i) {
+				isprimes[j] = 0;
+			}
+		}
+	}
+
+	vector<ll> primes;
+	primes.pb(2);
+	for (ll i = 3; i <= N; i++)
+		if (isprimes[i])
+
+
+		}
 
 
 int main() {
@@ -59,14 +80,17 @@ int main() {
 
 	// Code Starts from here!
 
-	ll t;
-	cin >> t;
-	flush;
-	while (t--)
-	{
-		ll n; cin >> n;
-		cout << max(6LL, n + 1) / 2 * 5 << endl;
-	}
+	// ll t;
+	// cin>>t;
+	// flush;
+	// while(t--)
+	// {
+	// 	// Tests Case
+	// }
+
+
+
+
 
 	return 0;
 }

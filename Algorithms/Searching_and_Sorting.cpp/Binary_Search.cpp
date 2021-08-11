@@ -57,7 +57,7 @@ ll Binary_Search(vi &l, ll k)
 	int lb = 0, ub = l.size() - 1;
 	while (lb <= ub)
 	{
-		int m = (lb + ub) / 2;
+		int m = mid(lb, ub);
 		if (l[m] == k) return m;
 		else if (l[m] > k) ub = m - 1;
 		else lb = m + 1;

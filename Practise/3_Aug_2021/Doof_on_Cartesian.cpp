@@ -1,4 +1,4 @@
-//Link   - https://codeforces.com/contest/1555/problem/A
+//Link   - https://www.codechef.com/problems/CLPNT
 //Author - seeitsmanish
 #include<bits/stdc++.h>
 // #include<ext/pb_ds/assoc_container.hpp>
@@ -14,7 +14,7 @@ using namespace std;
 #define mod                     1000000007
 #define vi                      vector<ll>
 #define vii                     vector<ll,ll>
-#define vs                      vector<string>
+#define vs                      vector<>string>
 #define pii                     pair<ll,ll>
 #define mii                     map<ll,ll>
 #define ump                     unordered_map
@@ -51,7 +51,28 @@ void FIO() {
 // typedef tree<int, null_type, less<int>, rb_tree_tag, tree_order_statistics_node_update> pbds;
 // typedef trie<string, null_type, trie_string_access_traits<>, pat_trie_tag, trie_prefix_search_node_update> pbtrie;
 
-
+bool Binary_Search(vi &a, ll k) {
+	ll lb = 0, ub = a.size() - 1;
+	while (lb <= ub) {
+		ll mid = lb + (ub - lb) / 2;
+		if (a[mid] == k) return 1;
+		else if (a[mid] > k) ub = mid - 1;
+		else lb = mid + 1;
+	}
+	return 0;
+}
+ll Lower_Bound(vi &a, ll k) {
+	ll lb = 0, ub = a.size() - 1; ll ans = a.size();
+	while (lb <= ub) {
+		ll mid = lb + (ub - lb) / 2;
+		if (a[mid] >= k) {
+			ans = mid;
+			ub = mid - 1;
+		}
+		else lb = mid + 1;
+	}
+	return ans;
+}
 
 
 int main() {
@@ -61,12 +82,23 @@ int main() {
 
 	ll t;
 	cin >> t;
-	flush;
+	// flush;
 	while (t--)
 	{
 		ll n; cin >> n;
-		cout << max(6LL, n + 1) / 2 * 5 << endl;
+		vi a(n);
+		loop(i, 0, n - 1) cin >> a[i];
+
+		ll q;
+		cin >> q;
+		while (q--) {
+			ll x, y; cin >> x >> y;
+			if (Binary_Search(a, x + y)) cout << -1 << endl;
+			else cout << Lower_Bound(a, x + y) << endl;
+		}
+
 	}
+
 
 	return 0;
 }

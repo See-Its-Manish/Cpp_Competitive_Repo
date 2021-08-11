@@ -1,4 +1,4 @@
-//Link   - https://codeforces.com/contest/1555/problem/A
+//Link   - Local Maxima Practise
 //Author - seeitsmanish
 #include<bits/stdc++.h>
 // #include<ext/pb_ds/assoc_container.hpp>
@@ -14,7 +14,7 @@ using namespace std;
 #define mod                     1000000007
 #define vi                      vector<ll>
 #define vii                     vector<ll,ll>
-#define vs                      vector<string>
+#define vs                      vector<>string>
 #define pii                     pair<ll,ll>
 #define mii                     map<ll,ll>
 #define ump                     unordered_map
@@ -51,7 +51,16 @@ void FIO() {
 // typedef tree<int, null_type, less<int>, rb_tree_tag, tree_order_statistics_node_update> pbds;
 // typedef trie<string, null_type, trie_string_access_traits<>, pat_trie_tag, trie_prefix_search_node_update> pbtrie;
 
-
+TC - O(n)
+SC - O(1)
+ll Local_Maxima(vi& arr)
+{
+	loop(i, 1, arr.size() - 2)
+	{
+		if (arr[i] > arr[i - 1] and arr[i] > arr[i + 1]) return i;
+	}
+	return -1;
+}
 
 
 int main() {
@@ -59,14 +68,10 @@ int main() {
 
 	// Code Starts from here!
 
-	ll t;
-	cin >> t;
-	flush;
-	while (t--)
-	{
-		ll n; cin >> n;
-		cout << max(6LL, n + 1) / 2 * 5 << endl;
-	}
+
+
+
+
 
 	return 0;
 }

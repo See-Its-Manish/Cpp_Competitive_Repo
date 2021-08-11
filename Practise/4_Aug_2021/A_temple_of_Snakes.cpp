@@ -1,4 +1,4 @@
-//Link   - https://codeforces.com/contest/1555/problem/A
+//Link   - https://www.codechef.com/problems/SNTEMPLE
 //Author - seeitsmanish
 #include<bits/stdc++.h>
 // #include<ext/pb_ds/assoc_container.hpp>
@@ -14,7 +14,7 @@ using namespace std;
 #define mod                     1000000007
 #define vi                      vector<ll>
 #define vii                     vector<ll,ll>
-#define vs                      vector<string>
+#define vs                      vector<>string>
 #define pii                     pair<ll,ll>
 #define mii                     map<ll,ll>
 #define ump                     unordered_map
@@ -51,8 +51,34 @@ void FIO() {
 // typedef tree<int, null_type, less<int>, rb_tree_tag, tree_order_statistics_node_update> pbds;
 // typedef trie<string, null_type, trie_string_access_traits<>, pat_trie_tag, trie_prefix_search_node_update> pbtrie;
 
+ll find_peak(vi &arr) {
+	ll lb = 0, ub = arr.size() - 1;
+	while (lb < ub) {
+		ll mid = lb + (ub - lb) / 2;
+		if (arr[mid] < arr[mid + 1]) lb = mid + 1;
+		else ub = mid;
 
+	}
+	return lb;
+}
 
+ll Lower_Bound(vi &arr, ll start, ll end, ll k) {
+	ll lb = start, ub = end;
+	ll ans = 0;
+	while (lb <= ub) {
+		ll mid = lb + (ub - lb) / 2;
+		if (arr[mid] <= k)  {
+			ans = mid;
+			lb = mid + 1;
+		} else ub = mid - 1;
+	}
+	return ans;
+}
+struct compare {
+	bool operator()(const ll &a, const ll &b) const {
+		return (a > b);
+	}
+};
 
 int main() {
 	FIO();
@@ -61,12 +87,43 @@ int main() {
 
 	ll t;
 	cin >> t;
-	flush;
+	// flush;
 	while (t--)
 	{
-		ll n; cin >> n;
-		cout << max(6LL, n + 1) / 2 * 5 << endl;
+		ll n;
+		cin >> n;
+		vi a(n);
+		loop(i, 0, n - 1) cin >> a[i];
+
+		ll mid = find_peak(a);
+		ll start = Lower_Bound(a, 0, mid, 1) ;
+		ll end = lower_bound(a.begin() + mid, a.end(), 1, compare()) - a.begin();
+
+		// log(start, mid, end);
+		ll ans = 0;
+		loop(i, 0, start - 1) ans += a[i];
+		// log(ans);
+		ll h = 1;
+		loop(i, start, mid) {
+			if (h < a[i]) ans += a[i] - h;
+			h++;
+		}
+		// log(ans);
+		h = a[mid] - 1;
+		loop(i, mid + 1, end) {
+			if (h < a[i]) ans += a[i] - h;
+			h--;
+		}
+		// log(ans);
+		loop(i, end + 1, n - 1) ans += a[i];
+		// log(ans);
+		cout << ans << endl;
+
 	}
+
+
+
+
 
 	return 0;
 }

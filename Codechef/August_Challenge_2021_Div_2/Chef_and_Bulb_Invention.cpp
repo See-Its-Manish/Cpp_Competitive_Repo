@@ -1,4 +1,4 @@
-//Link   - https://codeforces.com/contest/1555/problem/A
+//Link   - https://www.codechef.com/AUG21B/problems/CHFINVNT
 //Author - seeitsmanish
 #include<bits/stdc++.h>
 // #include<ext/pb_ds/assoc_container.hpp>
@@ -14,7 +14,7 @@ using namespace std;
 #define mod                     1000000007
 #define vi                      vector<ll>
 #define vii                     vector<ll,ll>
-#define vs                      vector<string>
+#define vs                      vector<>string>
 #define pii                     pair<ll,ll>
 #define mii                     map<ll,ll>
 #define ump                     unordered_map
@@ -61,12 +61,19 @@ int main() {
 
 	ll t;
 	cin >> t;
-	flush;
+	// flush;
 	while (t--)
 	{
-		ll n; cin >> n;
-		cout << max(6LL, n + 1) / 2 * 5 << endl;
+		ll n, p, k;
+		cin >> n >> p >> k;
+		ll end = (p % k);
+		cout << (n / k) *() + ceil(1.0 * p / k) << endl;;
+
 	}
+
+
+
+
 
 	return 0;
 }

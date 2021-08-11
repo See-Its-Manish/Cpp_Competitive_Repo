@@ -1,4 +1,4 @@
-//Link   - https://codeforces.com/contest/1555/problem/A
+//Link   - Given a Perfect Square, Find its mean using Binary Search
 //Author - seeitsmanish
 #include<bits/stdc++.h>
 // #include<ext/pb_ds/assoc_container.hpp>
@@ -14,7 +14,7 @@ using namespace std;
 #define mod                     1000000007
 #define vi                      vector<ll>
 #define vii                     vector<ll,ll>
-#define vs                      vector<string>
+#define vs                      vector<>string>
 #define pii                     pair<ll,ll>
 #define mii                     map<ll,ll>
 #define ump                     unordered_map
@@ -51,7 +51,20 @@ void FIO() {
 // typedef tree<int, null_type, less<int>, rb_tree_tag, tree_order_statistics_node_update> pbds;
 // typedef trie<string, null_type, trie_string_access_traits<>, pat_trie_tag, trie_prefix_search_node_update> pbtrie;
 
-
+// TC - O(logn)
+// SC - O(1)
+ll Square_Root(ll n)
+{
+	ll lb = 0, ub = n;
+	while (lb <= ub)
+	{
+		ll mid = lb + (ub - lb) / 2;
+		if (mid * mid == n) return mid;
+		else if (mid * mid > n) ub = mid - 1;
+		else lb = mid + 1;
+	}
+	return -1;
+}
 
 
 int main() {
@@ -59,14 +72,10 @@ int main() {
 
 	// Code Starts from here!
 
-	ll t;
-	cin >> t;
-	flush;
-	while (t--)
-	{
-		ll n; cin >> n;
-		cout << max(6LL, n + 1) / 2 * 5 << endl;
-	}
+	cout << Square_Root(49) << endl;	// 7
+	cout << Square_Root(16129) << endl; // 127
+	cout << Square_Root(45) << endl;    // -1
+	cout << Square_Root(0) << endl;     // 0
 
 	return 0;
 }

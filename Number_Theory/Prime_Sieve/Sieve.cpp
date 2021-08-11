@@ -1,4 +1,4 @@
-//Link   - https://codeforces.com/contest/1555/problem/A
+//AIM    - Sieve of Eratosthenes
 //Author - seeitsmanish
 #include<bits/stdc++.h>
 // #include<ext/pb_ds/assoc_container.hpp>
@@ -14,7 +14,7 @@ using namespace std;
 #define mod                     1000000007
 #define vi                      vector<ll>
 #define vii                     vector<ll,ll>
-#define vs                      vector<string>
+#define vs                      vector<>string>
 #define pii                     pair<ll,ll>
 #define mii                     map<ll,ll>
 #define ump                     unordered_map
@@ -51,7 +51,29 @@ void FIO() {
 // typedef tree<int, null_type, less<int>, rb_tree_tag, tree_order_statistics_node_update> pbds;
 // typedef trie<string, null_type, trie_string_access_traits<>, pat_trie_tag, trie_prefix_search_node_update> pbtrie;
 
+void sieve(int n)
+{
+	vector<bool> primes(n + 1, true);
+	primes[0] = primes[1] = false;
 
+	for (int i = 2; i * i <= n; i++)
+	{
+		if (primes[i])
+		{
+			for (int j = i * i; j <= n; j += i)
+			{
+				primes[j] = false;
+			}
+		}
+	}
+
+	for (int i = 2; i <= n; i++)
+	{
+		if (primes[i])
+			cout << i << " ";
+	}
+
+}
 
 
 int main() {
@@ -59,14 +81,7 @@ int main() {
 
 	// Code Starts from here!
 
-	ll t;
-	cin >> t;
-	flush;
-	while (t--)
-	{
-		ll n; cin >> n;
-		cout << max(6LL, n + 1) / 2 * 5 << endl;
-	}
+	sieve(100);
 
 	return 0;
 }

@@ -1,4 +1,4 @@
-//Link   - https://codeforces.com/contest/1555/problem/A
+//Link   -
 //Author - seeitsmanish
 #include<bits/stdc++.h>
 // #include<ext/pb_ds/assoc_container.hpp>
@@ -14,7 +14,7 @@ using namespace std;
 #define mod                     1000000007
 #define vi                      vector<ll>
 #define vii                     vector<ll,ll>
-#define vs                      vector<string>
+#define vs                      vector<>string>
 #define pii                     pair<ll,ll>
 #define mii                     map<ll,ll>
 #define ump                     unordered_map
@@ -61,12 +61,33 @@ int main() {
 
 	ll t;
 	cin >> t;
-	flush;
+	// flush;
 	while (t--)
 	{
-		ll n; cin >> n;
-		cout << max(6LL, n + 1) / 2 * 5 << endl;
+		ll n, k;
+		cin >> n >> k;
+		ump<ll, ll> mp;
+		ll x;
+		loop(i, 0, n - 1) {
+			cin >> x;
+			ll j = 0;
+			while (x > 0)
+			{
+
+				if (x & 1) mp[j]++;
+				j++;
+				x = x >> 1;
+			}
+		}
+		ll ans = 0;
+		for (auto &[num, freq] : mp) ans += ceil(1.0 * freq / k);
+		cout << ans << endl;
+
 	}
+
+
+
+
 
 	return 0;
 }

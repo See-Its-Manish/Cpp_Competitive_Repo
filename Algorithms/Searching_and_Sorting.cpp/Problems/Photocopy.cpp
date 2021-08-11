@@ -1,4 +1,4 @@
-//Link   - https://codeforces.com/contest/1555/problem/A
+//Link   -
 //Author - seeitsmanish
 #include<bits/stdc++.h>
 // #include<ext/pb_ds/assoc_container.hpp>
@@ -14,7 +14,7 @@ using namespace std;
 #define mod                     1000000007
 #define vi                      vector<ll>
 #define vii                     vector<ll,ll>
-#define vs                      vector<string>
+#define vs                      vector<>string>
 #define pii                     pair<ll,ll>
 #define mii                     map<ll,ll>
 #define ump                     unordered_map
@@ -52,21 +52,37 @@ void FIO() {
 // typedef trie<string, null_type, trie_string_access_traits<>, pat_trie_tag, trie_prefix_search_node_update> pbtrie;
 
 
+bool good(ll mid, ll n, ll x, ll y)
+{
+	return (mid / x + mid / y + 1) >= n;
+}
 
+ll min_time_printing(ll x, ll y, ll n)
+{
+	ll lb = 0, ub = max(x, y) * n;
+	ll ans = 0;
+	while (lb <= ub)
+	{
+		ll mid = lb + (ub - lb) / 2;
+
+		if (good(mid, n, x, y)) {
+			ans = mid;
+			ub = mid - 1;
+		} else lb = mid + 1;
+	}
+	return ans + min(x, y);
+}
 
 int main() {
 	FIO();
 
 	// Code Starts from here!
 
-	ll t;
-	cin >> t;
-	flush;
-	while (t--)
-	{
-		ll n; cin >> n;
-		cout << max(6LL, n + 1) / 2 * 5 << endl;
-	}
+	cout << min_time_printing(1, 1, 5) << endl;
+
+
+
+
 
 	return 0;
 }

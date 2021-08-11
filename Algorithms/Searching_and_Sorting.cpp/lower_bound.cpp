@@ -1,4 +1,4 @@
-//Link   - https://codeforces.com/contest/1555/problem/A
+//Link   - Implementing Lower Bound
 //Author - seeitsmanish
 #include<bits/stdc++.h>
 // #include<ext/pb_ds/assoc_container.hpp>
@@ -14,7 +14,7 @@ using namespace std;
 #define mod                     1000000007
 #define vi                      vector<ll>
 #define vii                     vector<ll,ll>
-#define vs                      vector<string>
+#define vs                      vector<>string>
 #define pii                     pair<ll,ll>
 #define mii                     map<ll,ll>
 #define ump                     unordered_map
@@ -51,6 +51,24 @@ void FIO() {
 // typedef tree<int, null_type, less<int>, rb_tree_tag, tree_order_statistics_node_update> pbds;
 // typedef trie<string, null_type, trie_string_access_traits<>, pat_trie_tag, trie_prefix_search_node_update> pbtrie;
 
+// TC - O(logn)
+// SC - O(1)
+int Lower_Bound(vi &arr, ll target)
+{
+	ll lb = 0, ub = arr.size() - 1;
+	ll ans = -1;
+	while (lb <= ub)
+	{
+		ll mid = lb + (ub - lb) / 2;	// Formula for mid to avoid Overflow
+		if (arr[mid] >= target) {
+			ans = mid;
+			ub = mid - 1;
+		}
+		else lb = mid + 1;
+	}
+	return ans;
+
+}
 
 
 
@@ -58,15 +76,12 @@ int main() {
 	FIO();
 
 	// Code Starts from here!
-
-	ll t;
-	cin >> t;
-	flush;
-	while (t--)
-	{
-		ll n; cin >> n;
-		cout << max(6LL, n + 1) / 2 * 5 << endl;
-	}
+	vi arr{1, 1, 2, 2, 3, 6, 7, 7, 7, 8};
+	//Lower Bound --> First Element Greater than Equal to (x)
+	cout << Lower_Bound(arr, 5) << endl;
+	cout << Lower_Bound(arr, 7) << endl;
+	cout << Lower_Bound(arr, 8) << endl;
+	cout << Lower_Bound(arr, 10) << endl;
 
 	return 0;
 }

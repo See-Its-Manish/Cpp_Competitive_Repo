@@ -1,4 +1,4 @@
-//Link   - https://codeforces.com/contest/1555/problem/A
+//Link   - To find Peak Element in the Unsorted array using Binary Search
 //Author - seeitsmanish
 #include<bits/stdc++.h>
 // #include<ext/pb_ds/assoc_container.hpp>
@@ -14,7 +14,7 @@ using namespace std;
 #define mod                     1000000007
 #define vi                      vector<ll>
 #define vii                     vector<ll,ll>
-#define vs                      vector<string>
+#define vs                      vector<>string>
 #define pii                     pair<ll,ll>
 #define mii                     map<ll,ll>
 #define ump                     unordered_map
@@ -51,7 +51,22 @@ void FIO() {
 // typedef tree<int, null_type, less<int>, rb_tree_tag, tree_order_statistics_node_update> pbds;
 // typedef trie<string, null_type, trie_string_access_traits<>, pat_trie_tag, trie_prefix_search_node_update> pbtrie;
 
-
+/*
+TC - O(logn)
+SC - O(1)
+*/
+ll find_peak(vi &arr)
+{
+	ll n = arr.size();
+	ll lb = 0, ub = n - 1;
+	while (lb < ub)
+	{
+		ll mid = lb + (ub - lb) / 2;
+		if (arr[mid] < arr[mid + 1]) lb = mid + 1;
+		else ub = mid;
+	}
+	return lb;
+}
 
 
 int main() {
@@ -59,14 +74,10 @@ int main() {
 
 	// Code Starts from here!
 
-	ll t;
-	cin >> t;
-	flush;
-	while (t--)
-	{
-		ll n; cin >> n;
-		cout << max(6LL, n + 1) / 2 * 5 << endl;
-	}
+	vi arr1{1, 2, 1, 3, 5, 6, 4};
+	cout << find_peak(arr1) << endl;
+	vi arr2{1, 2, 1, 3};
+	cout << find_peak(arr2) << endl;
 
 	return 0;
 }

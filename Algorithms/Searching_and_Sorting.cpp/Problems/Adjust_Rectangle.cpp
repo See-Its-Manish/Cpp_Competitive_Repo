@@ -1,4 +1,4 @@
-//Link   - https://codeforces.com/contest/1555/problem/A
+//AIM    - Given width, height, number of rectangles, find the square which has minimum side and can have all rectangles
 //Author - seeitsmanish
 #include<bits/stdc++.h>
 // #include<ext/pb_ds/assoc_container.hpp>
@@ -14,7 +14,7 @@ using namespace std;
 #define mod                     1000000007
 #define vi                      vector<ll>
 #define vii                     vector<ll,ll>
-#define vs                      vector<string>
+#define vs                      vector<>string>
 #define pii                     pair<ll,ll>
 #define mii                     map<ll,ll>
 #define ump                     unordered_map
@@ -51,22 +51,35 @@ void FIO() {
 // typedef tree<int, null_type, less<int>, rb_tree_tag, tree_order_statistics_node_update> pbds;
 // typedef trie<string, null_type, trie_string_access_traits<>, pat_trie_tag, trie_prefix_search_node_update> pbtrie;
 
+bool good(ll w, ll h, ll n, ll mid)
+{
+	return ( mid / w) * (mid / h) >= n;
+}
 
+ll Adjust_Rectangle(ll w, ll h, ll n)
+{
+	ll ans = -1;
+	ll lb = 0, ub = max(w, h) * n;
+	while (lb <= ub)
+	{
+		ll mid = lb + (ub - lb) / 2;
+		if (good(w, h, n, mid))
+		{
+			ans = mid;
+			ub = mid - 1;
+		}
+		else lb = mid + 1;
+	}
 
+	return ans;
+}
 
 int main() {
 	FIO();
 
 	// Code Starts from here!
 
-	ll t;
-	cin >> t;
-	flush;
-	while (t--)
-	{
-		ll n; cin >> n;
-		cout << max(6LL, n + 1) / 2 * 5 << endl;
-	}
+	cout << Adjust_Rectangle(2, 3, 10) << endl;
 
 	return 0;
 }

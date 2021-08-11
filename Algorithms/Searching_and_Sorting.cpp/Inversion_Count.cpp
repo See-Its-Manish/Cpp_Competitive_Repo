@@ -1,4 +1,4 @@
-//Link   - https://codeforces.com/contest/1555/problem/A
+//Link   - https://www.spoj.com/problems/INVCNT/
 //Author - seeitsmanish
 #include<bits/stdc++.h>
 // #include<ext/pb_ds/assoc_container.hpp>
@@ -14,7 +14,7 @@ using namespace std;
 #define mod                     1000000007
 #define vi                      vector<ll>
 #define vii                     vector<ll,ll>
-#define vs                      vector<string>
+#define vs                      vector<>string>
 #define pii                     pair<ll,ll>
 #define mii                     map<ll,ll>
 #define ump                     unordered_map
@@ -22,7 +22,7 @@ using namespace std;
 #define pq_max                  priority_queue<ll>
 #define pq_min                  priority_queue<ll,vi,greater<ll>>
 #define endl                    "\n"
-#define flush                   cin.get()
+#define flush                    cin.get()
 #define mid(l,r)                l+(r-l)/2
 #define all(v)                  v.begin(), v.end()
 #define print(v)                for(auto &n:v) cout<<n<<" "; cout<<endl
@@ -51,7 +51,30 @@ void FIO() {
 // typedef tree<int, null_type, less<int>, rb_tree_tag, tree_order_statistics_node_update> pbds;
 // typedef trie<string, null_type, trie_string_access_traits<>, pat_trie_tag, trie_prefix_search_node_update> pbtrie;
 
+ll MergeHalves(vi &arr, ll start, ll end) {
+	vi temp(end - start + 1);
+	ll mid = mid(start, end);
+	ll left = start, right = mid + 1, ind = 0;
+	ll inv_count = 0;
 
+	while (left <= mid and right <= end) {
+		if (arr[left] <= arr[right]) temp[ind++] = arr[left++];
+		else {temp[ind++] = arr[right++]; inv_count += mid - left + 1; }
+	}
+	if (right > end)while (left <= mid) temp[ind++] = arr[left++];
+	if (left > mid)while (right <= end) temp[ind++] = arr[right++];
+	loop(i, 0, temp.size() - 1) arr[i + start] = temp[i];
+	return inv_count;
+}
+
+ll MergeSort(vi &arr, ll start, ll end) {
+	if (start >= end) return 0;
+	ll mid = mid(start, end);
+	ll inv_count = 0;
+	inv_count += MergeSort(arr, start, mid);
+	inv_count += MergeSort(arr, mid + 1, end);
+	return inv_count += MergeHalves(arr, start, end);
+}
 
 
 int main() {
@@ -59,13 +82,14 @@ int main() {
 
 	// Code Starts from here!
 
-	ll t;
-	cin >> t;
-	flush;
-	while (t--)
-	{
+	ll t; cin >> t;
+	while (t--) {
 		ll n; cin >> n;
-		cout << max(6LL, n + 1) / 2 * 5 << endl;
+		vi arr(n);
+		loop(i, 0, n - 1) cin >> arr[i];
+
+		ll inv_count = MergeSort(arr, 0, arr.size() - 1);
+		cout << inv_count << endl;
 	}
 
 	return 0;

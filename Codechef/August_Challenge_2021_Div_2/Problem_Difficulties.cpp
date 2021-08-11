@@ -1,4 +1,4 @@
-//Link   - https://codeforces.com/contest/1555/problem/A
+//Link   - https://www.codechef.com/AUG21B/problems/PROBDIFF
 //Author - seeitsmanish
 #include<bits/stdc++.h>
 // #include<ext/pb_ds/assoc_container.hpp>
@@ -14,7 +14,7 @@ using namespace std;
 #define mod                     1000000007
 #define vi                      vector<ll>
 #define vii                     vector<ll,ll>
-#define vs                      vector<string>
+#define vs                      vector<>string>
 #define pii                     pair<ll,ll>
 #define mii                     map<ll,ll>
 #define ump                     unordered_map
@@ -51,8 +51,7 @@ void FIO() {
 // typedef tree<int, null_type, less<int>, rb_tree_tag, tree_order_statistics_node_update> pbds;
 // typedef trie<string, null_type, trie_string_access_traits<>, pat_trie_tag, trie_prefix_search_node_update> pbtrie;
 
-
-
+const int N = 4;
 
 int main() {
 	FIO();
@@ -61,12 +60,33 @@ int main() {
 
 	ll t;
 	cin >> t;
-	flush;
+	// flush;
 	while (t--)
 	{
-		ll n; cin >> n;
-		cout << max(6LL, n + 1) / 2 * 5 << endl;
+		pair<ll, bool> a[N];
+		loop(i, 0, N - 1) {
+			ll x; cin >> x;
+			a[i] = mp(x, 0);
+		}
+
+		ll ans = 0;
+		loop(i, 0, N - 1) {
+			if (a[i].ss == 0)
+			{
+				loop(j, 0, N - 1)
+				{
+					if (a[j].ff != a[i].ff and a[j].ss == 0)
+					{
+						ans += 1;
+						a[i].ss = a[j].ss = 1;
+						break;
+					}
+				}
+			}
+		}
+		cout << ans << endl;
 	}
+
 
 	return 0;
 }

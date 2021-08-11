@@ -1,4 +1,4 @@
-//Link   - https://codeforces.com/contest/1555/problem/A
+//Link   - https://codeforces.com/contest/1557/problem/B
 //Author - seeitsmanish
 #include<bits/stdc++.h>
 // #include<ext/pb_ds/assoc_container.hpp>
@@ -14,7 +14,7 @@ using namespace std;
 #define mod                     1000000007
 #define vi                      vector<ll>
 #define vii                     vector<ll,ll>
-#define vs                      vector<string>
+#define vs                      vector<>string>
 #define pii                     pair<ll,ll>
 #define mii                     map<ll,ll>
 #define ump                     unordered_map
@@ -64,8 +64,24 @@ int main() {
 	flush;
 	while (t--)
 	{
-		ll n; cin >> n;
-		cout << max(6LL, n + 1) / 2 * 5 << endl;
+		ll n, k;
+		cin >> n >> k;
+		vi a(n);
+		loop(i, 0, n - 1) cin >> a[i];
+
+		vi suffixmax(n);
+		suffixmax[n - 1] = -1;
+
+		loop(i, n - 2, 0) suffixmax[i] = max(a[i], suffixmax[i + 1]);
+		ll count = 0;
+		ll max = INT_MIN;
+		loop(i, 0, n - 2) {
+			if (a[i] > a[i + 1] or a[i] < suffixmax[i + 1])
+				count++;
+		}
+		count++;
+
+		cout << ((count <= k) ? "YES" : "NO") << endl;
 	}
 
 	return 0;

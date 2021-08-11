@@ -1,4 +1,4 @@
-//Link   - https://codeforces.com/contest/1555/problem/A
+//Link   - https://www.spoj.com/problems/CUBEFR/
 //Author - seeitsmanish
 #include<bits/stdc++.h>
 // #include<ext/pb_ds/assoc_container.hpp>
@@ -14,7 +14,7 @@ using namespace std;
 #define mod                     1000000007
 #define vi                      vector<ll>
 #define vii                     vector<ll,ll>
-#define vs                      vector<string>
+#define vs                      vector<>string>
 #define pii                     pair<ll,ll>
 #define mii                     map<ll,ll>
 #define ump                     unordered_map
@@ -51,21 +51,44 @@ void FIO() {
 // typedef tree<int, null_type, less<int>, rb_tree_tag, tree_order_statistics_node_update> pbds;
 // typedef trie<string, null_type, trie_string_access_traits<>, pat_trie_tag, trie_prefix_search_node_update> pbtrie;
 
+#define MAX 1000005
+bitset<MAX> cubes;
+vi pos(MAX);
+void precomputation()
+{
+	cubes.set();
+	for (ll i = 2; i * i * i <= MAX; i++) {
+		if (cubes[i]) {
+			for (ll j = 1; i * i * i * j <= MAX; j++) {
+				cubes[i * i * i * j] = 0;
+			}
+		}
+	}
+	ll p = 1;
+	for (ll i = 1; i <= MAX; i++ ) {
+		if (cubes[i]) pos[i] = p++;
+		else pos[i] = -1;
+	}
 
+}
 
 
 int main() {
 	FIO();
 
 	// Code Starts from here!
-
+	precomputation();
 	ll t;
 	cin >> t;
 	flush;
-	while (t--)
-	{
-		ll n; cin >> n;
-		cout << max(6LL, n + 1) / 2 * 5 << endl;
+	loop(i, 1, t) {
+
+		ll n;
+		cin >> n;
+		cout << "Case " << i << ": ";
+		if (pos[n] != -1) cout << pos[n] << endl;
+		else cout << "Not Cube Free" << endl;
+
 	}
 
 	return 0;

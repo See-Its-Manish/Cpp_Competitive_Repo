@@ -1,4 +1,4 @@
-//Link   - https://codeforces.com/contest/1555/problem/A
+//Link   - https://codeforces.com/contest/1557/problem/A
 //Author - seeitsmanish
 #include<bits/stdc++.h>
 // #include<ext/pb_ds/assoc_container.hpp>
@@ -14,7 +14,7 @@ using namespace std;
 #define mod                     1000000007
 #define vi                      vector<ll>
 #define vii                     vector<ll,ll>
-#define vs                      vector<string>
+#define vs                      vector<>string>
 #define pii                     pair<ll,ll>
 #define mii                     map<ll,ll>
 #define ump                     unordered_map
@@ -61,12 +61,22 @@ int main() {
 
 	ll t;
 	cin >> t;
-	flush;
-	while (t--)
-	{
-		ll n; cin >> n;
-		cout << max(6LL, n + 1) / 2 * 5 << endl;
+	while (t-- ) {
+		ll n;
+		cin >> n;
+		ll max = LONG_MIN;
+		ll in;
+		ld sum_of_array = 0;
+		loop(i, 0, n - 1) {
+			cin >> in;
+			sum_of_array += in;
+			max = ::max(in, max);
+		}
+		sum_of_array -= max;
+		cout << setprecision(9) << fixed << (max + (sum_of_array / (n - 1)) ) << endl;
 	}
+
+
 
 	return 0;
 }

@@ -1,4 +1,4 @@
-//Link   - https://codeforces.com/contest/1555/problem/A
+//Link   - https://www.spoj.com/problems/DIVFACT/
 //Author - seeitsmanish
 #include<bits/stdc++.h>
 // #include<ext/pb_ds/assoc_container.hpp>
@@ -14,7 +14,7 @@ using namespace std;
 #define mod                     1000000007
 #define vi                      vector<ll>
 #define vii                     vector<ll,ll>
-#define vs                      vector<string>
+#define vs                      vector<>string>
 #define pii                     pair<ll,ll>
 #define mii                     map<ll,ll>
 #define ump                     unordered_map
@@ -23,7 +23,7 @@ using namespace std;
 #define pq_min                  priority_queue<ll,vi,greater<ll>>
 #define endl                    "\n"
 #define flush                   cin.get()
-#define mid(l,r)                l+(r-l)/2
+#define mid(l,r)                (l+(r-l)/2)
 #define all(v)                  v.begin(), v.end()
 #define print(v)                for(auto &n:v) cout<<n<<" "; cout<<endl
 #define printpair(v)            for(auto &it:v) cout<<it.ff<<" "<<it.ss<<endl; cout<<"Ended"<<endl;
@@ -51,7 +51,42 @@ void FIO() {
 // typedef tree<int, null_type, less<int>, rb_tree_tag, tree_order_statistics_node_update> pbds;
 // typedef trie<string, null_type, trie_string_access_traits<>, pat_trie_tag, trie_prefix_search_node_update> pbtrie;
 
+#define MAX 50005
+bitset<MAX> isprime;
+vector<int> primes;
+void sieve()
+{
+	isprime.set();
+	isprime[0] = isprime[1] = 0;
+	for (int i = 2; i * i <= MAX; i++)
+	{
+		if (isprime[i])
+		{
+			for (int j = i * i; j <= MAX; j += i)  isprime[j] = 0;
+		}
+	}
+	primes.pb(2);
+	for (int i = 3; i < MAX; i += 2)
+		if (isprime[i]) primes.pb(i);
+}
 
+ll get_div(ll n)
+{
+	ll ans = 1;
+	for (int i = 0; primes[i] <= n; i++)
+	{
+		ll count = 0;
+		int p = primes[i];
+		while ((n / p) != 0)
+		{
+			count = (count + (n / p)) % mod;
+			p = p * primes[i];
+		}
+
+		ans = (ans * (count + 1) % mod) % mod;
+	}
+	return ans;
+}
 
 
 int main() {
@@ -61,12 +96,19 @@ int main() {
 
 	ll t;
 	cin >> t;
-	flush;
+	// flush;
+	sieve();
 	while (t--)
 	{
+		// Tests Case
 		ll n; cin >> n;
-		cout << max(6LL, n + 1) / 2 * 5 << endl;
+		cout << get_div(n) << endl;
+
 	}
+
+
+
+
 
 	return 0;
 }

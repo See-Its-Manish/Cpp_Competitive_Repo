@@ -1,4 +1,4 @@
-//Link   - https://www.codechef.com/FEB21C/problems/TEAMNAME
+//Link   - Bubble sort using Recursion
 //Author - seeitsmanish
 #include<bits/stdc++.h>
 // #include<ext/pb_ds/assoc_container.hpp>
@@ -23,6 +23,7 @@ using namespace std;
 #define pq_min                  priority_queue<ll,vi,greater<ll>>
 #define endl                    "\n"
 #define flush                   cin.get()
+#define mid(l,r)                (l+(r-l)/2)
 #define all(v)                  v.begin(), v.end()
 #define print(v)                for(auto &n:v) cout<<n<<" "; cout<<endl
 #define printpair(v)            for(auto &it:v) cout<<it.ff<<" "<<it.ss<<endl; cout<<"Ended"<<endl;
@@ -50,57 +51,47 @@ void FIO() {
 // typedef tree<int, null_type, less<int>, rb_tree_tag, tree_order_statistics_node_update> pbds;
 // typedef trie<string, null_type, trie_string_access_traits<>, pat_trie_tag, trie_prefix_search_node_update> pbtrie;
 
-ll noOfCommon(set<char> &p , set<char> &q)
-{
-	vector<char> t(min(p.size(), q.size()));
+// Pastebin link -> https://pastebin.com/JSkjRhhnx
 
-	auto it = set_intersection(all(p), all(q), t.begin());
-	return (it - t.begin());
+void swap(ll &a, ll & b)
+{
+	a = a + b;
+	b = a - b;
+	a = a - b;
 }
 
+void bubble_sort(vi &arr, ll i, ll j , ll n)
+{
+	//Base Case
+	if (i == n - 1) return;
+
+	if (j <= n - i - 2)
+	{
+		if (arr[j] > arr[j + 1]) swap(arr[j], arr[j + 1]);
+		bubble_sort(arr, i, j + 1, n);
+	}
+	else
+	{
+		print(arr);
+		bubble_sort(arr, i + 1, 0, n);
+	}
+
+}
 
 int main() {
 	FIO();
 
 	// Code Starts from here!
 
-	ll t;
-	cin >> t;
-	// flush;
-	while (t--)
-	{
-		ll n;
-		cin >> n;
-		flush;
-
-		ump<string , set<char>> map;
-		loop(i, 0, n - 1)
-		{
-			string s;
-			cin >> s;
-			map[s.substr(1)].insert(s[0]);
-		}
-
-		ll ans = 0;
-		for (auto i : map)
-		{
-			for (auto j : map)
-			{
-				if (i.ff != j.ff)
-				{
-					ll common = noOfCommon(i.ss, j.ss);
-					ans += (i.ss.size() - common) * (j.ss.size() - common);
-				}
-			}
-		}
-		cout << ans << endl;
-	}
-
-
-
+	ll n; cin >> n;
+	vi a(n);
+	loop(i, 0, n - 1) cin >> a[i];
+	bubble_sort(a, 0 , 0 , a.size());
+	print(a);
 
 
 	return 0;
 }
+
 
 

@@ -1,4 +1,4 @@
-//Link   - https://www.codechef.com/FEB21C/problems/TEAMNAME
+//AIM    - To count number of binary strings without consecutive ones
 //Author - seeitsmanish
 #include<bits/stdc++.h>
 // #include<ext/pb_ds/assoc_container.hpp>
@@ -23,6 +23,7 @@ using namespace std;
 #define pq_min                  priority_queue<ll,vi,greater<ll>>
 #define endl                    "\n"
 #define flush                   cin.get()
+#define mid(l,r)                (l+(r-l)/2)
 #define all(v)                  v.begin(), v.end()
 #define print(v)                for(auto &n:v) cout<<n<<" "; cout<<endl
 #define printpair(v)            for(auto &it:v) cout<<it.ff<<" "<<it.ss<<endl; cout<<"Ended"<<endl;
@@ -50,12 +51,14 @@ void FIO() {
 // typedef tree<int, null_type, less<int>, rb_tree_tag, tree_order_statistics_node_update> pbds;
 // typedef trie<string, null_type, trie_string_access_traits<>, pat_trie_tag, trie_prefix_search_node_update> pbtrie;
 
-ll noOfCommon(set<char> &p , set<char> &q)
-{
-	vector<char> t(min(p.size(), q.size()));
 
-	auto it = set_intersection(all(p), all(q), t.begin());
-	return (it - t.begin());
+ll count_binary_strings(ll n)
+{
+	if (n == 1 or n == 2) return n + 1;
+
+	ll choice_of_0 = count_binary_strings(n - 1);
+	ll choice_of_1 = count_binary_strings(n - 2);
+	return choice_of_1 + choice_of_0;
 }
 
 
@@ -64,43 +67,12 @@ int main() {
 
 	// Code Starts from here!
 
-	ll t;
-	cin >> t;
-	// flush;
-	while (t--)
-	{
-		ll n;
-		cin >> n;
-		flush;
-
-		ump<string , set<char>> map;
-		loop(i, 0, n - 1)
-		{
-			string s;
-			cin >> s;
-			map[s.substr(1)].insert(s[0]);
-		}
-
-		ll ans = 0;
-		for (auto i : map)
-		{
-			for (auto j : map)
-			{
-				if (i.ff != j.ff)
-				{
-					ll common = noOfCommon(i.ss, j.ss);
-					ans += (i.ss.size() - common) * (j.ss.size() - common);
-				}
-			}
-		}
-		cout << ans << endl;
-	}
-
-
-
+	cout << count_binary_strings(3) << endl;
+	cout << count_binary_strings(4) << endl;
 
 
 	return 0;
 }
+
 
 

@@ -1,4 +1,4 @@
-//Link   - https://www.codechef.com/FEB21C/problems/TEAMNAME
+//Link   - https://www.codechef.com/problems/WAV2
 //Author - seeitsmanish
 #include<bits/stdc++.h>
 // #include<ext/pb_ds/assoc_container.hpp>
@@ -23,6 +23,7 @@ using namespace std;
 #define pq_min                  priority_queue<ll,vi,greater<ll>>
 #define endl                    "\n"
 #define flush                   cin.get()
+#define mid(l,r)                (l+(r-l)/2)
 #define all(v)                  v.begin(), v.end()
 #define print(v)                for(auto &n:v) cout<<n<<" "; cout<<endl
 #define printpair(v)            for(auto &it:v) cout<<it.ff<<" "<<it.ss<<endl; cout<<"Ended"<<endl;
@@ -36,71 +37,52 @@ ll __gcd(ll a, ll b) {return b == 0 ? a : __gcd(b, a % b);}
 void err(istream_iterator<string> it) {}
 template<typename T, typename... Args>
 void err(istream_iterator<string> it, T a, Args... args) {
-	cout << *it << " = " << a << endl;
-	err(++it, args...);
+    cout << *it << " = " << a << endl;
+    err(++it, args...);
 }
 void FIO() {
-	ios_base::sync_with_stdio(0);
-	cin.tie(0); cout.tie(0);
+    ios_base::sync_with_stdio(0);
+    cin.tie(0); cout.tie(0);
 #ifndef ONLINE_JUDGE
-	freopen("input.txt", "r", stdin);
-	freopen("output.txt", "w", stdout);
+    freopen("input.txt", "r", stdin);
+    freopen("output.txt", "w", stdout);
 #endif
 }
 // typedef tree<int, null_type, less<int>, rb_tree_tag, tree_order_statistics_node_update> pbds;
 // typedef trie<string, null_type, trie_string_access_traits<>, pat_trie_tag, trie_prefix_search_node_update> pbtrie;
 
-ll noOfCommon(set<char> &p , set<char> &q)
-{
-	vector<char> t(min(p.size(), q.size()));
 
-	auto it = set_intersection(all(p), all(q), t.begin());
-	return (it - t.begin());
-}
 
 
 int main() {
-	FIO();
+    FIO();
 
-	// Code Starts from here!
-
-	ll t;
-	cin >> t;
-	// flush;
-	while (t--)
-	{
-		ll n;
-		cin >> n;
-		flush;
-
-		ump<string , set<char>> map;
-		loop(i, 0, n - 1)
-		{
-			string s;
-			cin >> s;
-			map[s.substr(1)].insert(s[0]);
-		}
-
-		ll ans = 0;
-		for (auto i : map)
-		{
-			for (auto j : map)
-			{
-				if (i.ff != j.ff)
-				{
-					ll common = noOfCommon(i.ss, j.ss);
-					ans += (i.ss.size() - common) * (j.ss.size() - common);
-				}
-			}
-		}
-		cout << ans << endl;
-	}
+    // Code Starts from here!
 
 
+    ll n, q; cin >> n >> q;
+    vi a(n);
+    loop(i, 0, n - 1) cin >> a[i];
+
+    sort(all(a));
+
+    ll x;
+    while (q--)
+    {
+        cin >> x;
+        auto it = lower_bound(all(a), x);
+        if (*it == x) cout << "0" << endl;
+        else
+        {
+            ll size = it - a.begin();
+            if (size % 2 == 0) cout << "POSITIVE" << endl;
+            else cout << "NEGATIVE" << endl;
+        }
+    }
 
 
-
-	return 0;
+    return 0;
 }
+
 
 

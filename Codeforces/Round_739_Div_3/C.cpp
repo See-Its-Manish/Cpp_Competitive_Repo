@@ -1,4 +1,4 @@
-//Link   - https://www.codechef.com/FEB21C/problems/TEAMNAME
+//Link   - https://codeforces.com/contest/1560/problem/C
 //Author - seeitsmanish
 #include<bits/stdc++.h>
 // #include<ext/pb_ds/assoc_container.hpp>
@@ -23,6 +23,7 @@ using namespace std;
 #define pq_min                  priority_queue<ll,vi,greater<ll>>
 #define endl                    "\n"
 #define flush                   cin.get()
+#define mid(l,r)                (l+(r-l)/2)
 #define all(v)                  v.begin(), v.end()
 #define print(v)                for(auto &n:v) cout<<n<<" "; cout<<endl
 #define printpair(v)            for(auto &it:v) cout<<it.ff<<" "<<it.ss<<endl; cout<<"Ended"<<endl;
@@ -50,12 +51,29 @@ void FIO() {
 // typedef tree<int, null_type, less<int>, rb_tree_tag, tree_order_statistics_node_update> pbds;
 // typedef trie<string, null_type, trie_string_access_traits<>, pat_trie_tag, trie_prefix_search_node_update> pbtrie;
 
-ll noOfCommon(set<char> &p , set<char> &q)
+ll getm(ll n)
 {
-	vector<char> t(min(p.size(), q.size()));
+	ll lb = 1;
+	ll ub = n;
+	ll ans = 1;
+	while (lb <= ub )
+	{
+		ll mid = mid(lb, ub);
 
-	auto it = set_intersection(all(p), all(q), t.begin());
-	return (it - t.begin());
+
+		if (mid * mid >= n)
+		{
+			ans = mid;
+			ub = mid - 1;
+		}
+		else
+		{
+			lb = mid + 1;
+		}
+
+	}
+	return ans;
+
 }
 
 
@@ -69,38 +87,18 @@ int main() {
 	// flush;
 	while (t--)
 	{
-		ll n;
-		cin >> n;
-		flush;
+		ll k; cin >> k;
+		ll m = getm(k);
+		ll n = m + ((m - 2) * (m - 1)) / 2;
+		ll ele = 2 * n - 1;
 
-		ump<string , set<char>> map;
-		loop(i, 0, n - 1)
-		{
-			string s;
-			cin >> s;
-			map[s.substr(1)].insert(s[0]);
-		}
-
-		ll ans = 0;
-		for (auto i : map)
-		{
-			for (auto j : map)
-			{
-				if (i.ff != j.ff)
-				{
-					ll common = noOfCommon(i.ss, j.ss);
-					ans += (i.ss.size() - common) * (j.ss.size() - common);
-				}
-			}
-		}
-		cout << ans << endl;
+		if (ele <= k) cout << m << " " << m - (k - ele)   << endl;
+		else cout << m - (ele - k)  << " " << m << endl;
 	}
-
-
-
 
 
 	return 0;
 }
+
 
 

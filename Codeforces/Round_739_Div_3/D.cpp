@@ -1,4 +1,4 @@
-//Link   - https://www.codechef.com/FEB21C/problems/TEAMNAME
+//Link   - https://codeforces.com/contest/1560/problem/D
 //Author - seeitsmanish
 #include<bits/stdc++.h>
 // #include<ext/pb_ds/assoc_container.hpp>
@@ -14,7 +14,7 @@ using namespace std;
 #define mod                     1000000007
 #define vi                      vector<ll>
 #define vii                     vector<ll,ll>
-#define vs                      vector<>string>
+#define vs                      vector<string>
 #define pii                     pair<ll,ll>
 #define mii                     map<ll,ll>
 #define ump                     unordered_map
@@ -23,6 +23,7 @@ using namespace std;
 #define pq_min                  priority_queue<ll,vi,greater<ll>>
 #define endl                    "\n"
 #define flush                   cin.get()
+#define mid(l,r)                (l+(r-l)/2)
 #define all(v)                  v.begin(), v.end()
 #define print(v)                for(auto &n:v) cout<<n<<" "; cout<<endl
 #define printpair(v)            for(auto &it:v) cout<<it.ff<<" "<<it.ss<<endl; cout<<"Ended"<<endl;
@@ -50,12 +51,30 @@ void FIO() {
 // typedef tree<int, null_type, less<int>, rb_tree_tag, tree_order_statistics_node_update> pbds;
 // typedef trie<string, null_type, trie_string_access_traits<>, pat_trie_tag, trie_prefix_search_node_update> pbtrie;
 
-ll noOfCommon(set<char> &p , set<char> &q)
+int compute(string &p, string &s)
 {
-	vector<char> t(min(p.size(), q.size()));
+	//  p -> One to be converted
+	//  s -> One to which p will converted
+	int ans, ip, is; ans = ip = is = 0;
+	while (ip < p.length() and is < s.length())
+	{
+		if (p[ip] == s[is])
+		{
+			ans++; is++;
+		}
+		ip++;
+	}
 
-	auto it = set_intersection(all(p), all(q), t.begin());
-	return (it - t.begin());
+	return (int)p.length() + (int) s.length() - 2 * ans;
+}
+
+#define N (ll)2*1e18 + 5
+vs p2;
+void precomputation()
+{
+	p2.pb("1");
+	for (ll p = 1; p <= N; p *= 2)
+		p2.pb(to_string(p));
 }
 
 
@@ -66,41 +85,54 @@ int main() {
 
 	ll t;
 	cin >> t;
-	// flush;
+	precomputation();
+	flush;
 	while (t--)
 	{
-		ll n;
-		cin >> n;
-		flush;
+		string n; getline(cin, n);
+		ll ans = n.length() + 1;
+		for (auto &ele : p2)
+			ans = min(ans, compute(n, ele));
 
-		ump<string , set<char>> map;
-		loop(i, 0, n - 1)
-		{
-			string s;
-			cin >> s;
-			map[s.substr(1)].insert(s[0]);
-		}
-
-		ll ans = 0;
-		for (auto i : map)
-		{
-			for (auto j : map)
-			{
-				if (i.ff != j.ff)
-				{
-					ll common = noOfCommon(i.ss, j.ss);
-					ans += (i.ss.size() - common) * (j.ss.size() - common);
-				}
-			}
-		}
 		cout << ans << endl;
 	}
 
-
-
-
-
 	return 0;
 }
+
+
+
+
+
+else {
+	for (d = 2; d < i; d++)
+	{
+		if (i % d == 0)
+		{
+			cout << "The number is composite";
+			break;
+		}
+	}
+
+	if (i == d)
+	{
+		cout << "The number is prime";
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 

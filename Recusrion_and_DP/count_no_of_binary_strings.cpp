@@ -61,14 +61,26 @@ ll count_binary_strings(ll n)
 	return choice_of_1 + choice_of_0;
 }
 
+void count_binary_strings(ll n, string out)
+{
+	if (n == 1 or n == 2)
+	{
+		cout << out << endl;
+		return;
+	}
+
+	count_binary_strings(n - 1, out + "0");
+	count_binary_strings(n - 2, out + "1");
+}
 
 int main() {
 	FIO();
 
 	// Code Starts from here!
 
-	cout << count_binary_strings(3) << endl;
-	cout << count_binary_strings(4) << endl;
+	// cout << count_binary_strings(3) << endl;
+	// cout << count_binary_strings(4) << endl;
+	count_binary_strings(3, "");
 
 
 	return 0;

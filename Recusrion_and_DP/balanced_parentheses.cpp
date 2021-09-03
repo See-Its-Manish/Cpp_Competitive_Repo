@@ -1,4 +1,4 @@
-//AIM    - Binary Search on Sorted Rotated List
+//Link   -
 //Author - seeitsmanish
 #include<bits/stdc++.h>
 // #include<ext/pb_ds/assoc_container.hpp>
@@ -23,7 +23,7 @@ using namespace std;
 #define pq_min                  priority_queue<ll,vi,greater<ll>>
 #define endl                    "\n"
 #define flush                   cin.get()
-#define mid(l,r)                l+(r-l)/2
+#define mid(l,r)                (l+(r-l)/2)
 #define all(v)                  v.begin(), v.end()
 #define print(v)                for(auto &n:v) cout<<n<<" "; cout<<endl
 #define printpair(v)            for(auto &it:v) cout<<it.ff<<" "<<it.ss<<endl; cout<<"Ended"<<endl;
@@ -52,34 +52,22 @@ void FIO() {
 // typedef trie<string, null_type, trie_string_access_traits<>, pat_trie_tag, trie_prefix_search_node_update> pbtrie;
 
 
-// TC - O(logn)
-// SC - O(1)
-int Binary_Search_on_rotated_list(vi &arr, ll target)
+void print_balanced_parentheses(ll n, ll i , ll s, ll c, string out)
 {
-	int n = arr.size();
-	int start = 0, end = n - 1;
-	while (start <= end)
+	if (i == n)
 	{
-		int mid = mid(start, end);
-		if (arr[mid] == target) return mid;
-		else if (arr[mid] >= arr[start])
-		{
-			// Case 1
-			if (target >= arr[start] and target < arr[mid])
-				end = mid - 1;
-			else
-				start = mid + 1;
-		}
-		else
-		{
-			if (target <= arr[end] and target  > arr[mid])
-				start = mid + 1;
-			else
-				end = mid - 1;
-		}
-
+		cout << out << endl;
+		return;
 	}
-	return -1;
+	if (s < n / 2 and )
+	{
+		print_balanced_parentheses(n, i + 1, s + 1, c, out + "(");
+		print_balanced_parentheses(n, i + 1, s, c + 1, out + ")");
+	}
+	else
+	{
+		print_balanced_parentheses(n, i + 1, s, c + 1, out + ")");
+	}
 }
 
 
@@ -88,9 +76,9 @@ int main() {
 
 	// Code Starts from here!
 
-	vi a{5, 6, 7, 8, 9, 10, 1, 2, 3};
-	cout << Binary_Search_on_rotated_list(a, 10) << endl;
-	cout << Binary_Search_on_rotated_list(a, 19) << endl;
+	print_balanced_parentheses(4, 0, 0, 0, "");
+
+
 
 
 	return 0;

@@ -53,12 +53,6 @@ void FIO() {
 
 // Pastebin link -> https://pastebin.com/JSkjRhhnx
 
-void swap(ll &a, ll & b)
-{
-	a = a + b;
-	b = a - b;
-	a = a - b;
-}
 
 void bubble_sort(vi &arr, ll i, ll j , ll n)
 {

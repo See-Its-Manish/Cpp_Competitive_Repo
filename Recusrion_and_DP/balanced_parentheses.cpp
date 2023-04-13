@@ -52,21 +52,18 @@ void FIO() {
 // typedef trie<string, null_type, trie_string_access_traits<>, pat_trie_tag, trie_prefix_search_node_update> pbtrie;
 
 
-void print_balanced_parentheses(ll n, ll i , ll s, ll c, string out)
-{
-	if (i == n)
-	{
+void gen(int open, int close, int n, string out) {
+
+	if (close == n) {
 		cout << out << endl;
 		return;
 	}
-	if (s < n / 2 and )
-	{
-		print_balanced_parentheses(n, i + 1, s + 1, c, out + "(");
-		print_balanced_parentheses(n, i + 1, s, c + 1, out + ")");
+
+	if (open < n) {
+		gen(open + 1, close, n, out + "(");
 	}
-	else
-	{
-		print_balanced_parentheses(n, i + 1, s, c + 1, out + ")");
+	if (close < open) {
+		gen(open, close + 1, n, out + ")");
 	}
 }
 
@@ -76,7 +73,7 @@ int main() {
 
 	// Code Starts from here!
 
-	print_balanced_parentheses(4, 0, 0, 0, "");
+	gen(0, 0, 3, "");
 
 
 

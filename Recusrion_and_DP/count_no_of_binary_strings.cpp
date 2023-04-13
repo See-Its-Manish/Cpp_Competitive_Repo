@@ -61,16 +61,26 @@ ll count_binary_strings(ll n)
 	return choice_of_1 + choice_of_0;
 }
 
-void count_binary_strings(ll n, string out)
+ll print_binary_strings(ll n, string out)
 {
-	if (n == 1 or n == 2)
-	{
-		cout << out << endl;
-		return;
+	if (n == 1 or n == 2) {
+		if (n == 1)
+		{
+			cout << "0" + out << endl;
+			cout << "1" + out << endl;
+		}
+		if (n == 2)
+		{
+			cout << "00" + out << endl;
+			cout << "10" + out << endl;
+			cout << "01" + out << endl;
+		}
+		return n + 1;
 	}
 
-	count_binary_strings(n - 1, out + "0");
-	count_binary_strings(n - 2, out + "1");
+	ll choice_of_0 = print_binary_strings(n - 1, out + "0");
+	ll choice_of_1 = print_binary_strings(n - 2, out + "01");
+	return choice_of_1 + choice_of_0;
 }
 
 int main() {
@@ -80,7 +90,7 @@ int main() {
 
 	// cout << count_binary_strings(3) << endl;
 	// cout << count_binary_strings(4) << endl;
-	count_binary_strings(3, "");
+	print_binary_strings(3, "");
 
 
 	return 0;
